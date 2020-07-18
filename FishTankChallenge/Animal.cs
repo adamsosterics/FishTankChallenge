@@ -8,14 +8,6 @@ namespace FishTankChallenge
         public AnimalSize Size { get; set; }
         public bool IsDead { get; set; }
 
-        public virtual void Eat(object obj)
-        {
-            if (IsDead)
-            {
-                return;
-            }
-        }
-
         public override bool Equals(object obj)
         {
             return obj is Animal animal &&
