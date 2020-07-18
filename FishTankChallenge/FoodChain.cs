@@ -2,33 +2,23 @@
 {
     static class FoodChain
     {
-        public static void Eat(Crab predator, Crab prey)
-        {
-            if (!predator.IsDead && !predator.IsHidden && prey.Size < predator.Size)
+        public static bool CanEat(Animal predator, Animal prey) =>
+            predator switch
             {
-                prey.IsDead = true;
-            }
-        }
-
-        public static void Eat(Fish predator, Crab prey)
-        {
-            if (!predator.IsDead && prey.Size == Animal.AnimalSize.Small)
-            {
-                prey.IsDead = true;
-            }
-        }
-
-        public static void Eat(Fish predator, Fish prey)
-        {
-            if (!predator.IsDead && (predator.Size - 1 == prey.Size))
-            {
-                prey.IsDead = true;
-            }
-        }
-
-        public static void Eat(Animal predator, Animal prey)
-        {
-
-        }
+                Animal { IsDead: true } => false,
+                Crab { IsHidden: true } => false,
+                Crab c => prey switch
+                {
+                    Crab p when (p.Size < c.Size) => true,
+                    _ => false
+                },
+                Fish f => prey switch
+                {
+                    Crab { Size: Animal.AnimalSize.Small } => true,
+                    Fish p when (f.Size - p.Size == 1) => true,
+                    _ => false
+                },
+                _ => false
+            };
     }
 }

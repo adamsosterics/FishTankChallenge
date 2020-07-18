@@ -22,7 +22,10 @@ namespace FishTankChallenge
         {
             for (int i = 0, j = Animals.Count -1 ; i < Animals.Count; i++, j--)
             {
-                FoodChain.Eat(Animals[i] as dynamic, Animals[j] as dynamic);
+                if (FoodChain.CanEat(Animals[i], Animals[j]))
+                {
+                    Animals[j].IsDead = true;
+                }
             }
         }
     }
