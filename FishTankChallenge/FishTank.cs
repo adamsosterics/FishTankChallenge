@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace FishTankChallenge
 {
@@ -20,9 +18,11 @@ namespace FishTankChallenge
 
         public void StartGameofLife()
         {
-            for (int i = 0, j = Animals.Count -1 ; i < Animals.Count; i++, j--)
+            for (int i = 0, j = Animals.Count - 1; i < Animals.Count; i++, j--)
             {
-                Animals[i].Eat(Animals[j]);
+                dynamic predator = Animals[i];
+                dynamic prey = Animals[j];
+                predator.Eat(prey);
             }
         }
     }

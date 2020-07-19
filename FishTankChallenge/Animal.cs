@@ -2,18 +2,15 @@
 
 namespace FishTankChallenge
 {
-    public abstract class Animal
+    public abstract class Animal : IEat<Animal>
     {
         public string Name { get; set; }
         public AnimalSize Size { get; set; }
         public bool IsDead { get; set; }
 
-        public virtual void Eat(object obj)
+        public void Eat(Animal prey)
         {
-            if (IsDead)
-            {
-                return;
-            }
+            // it is needed as a fallback method
         }
 
         public override bool Equals(object obj)

@@ -1,19 +1,20 @@
 ﻿namespace FishTankChallenge
 {
-    public class Fish : Animal
+    public class Fish : Animal, IEat<Crab>, IEat<Fish>
     {
-        public override void Eat(object obj)
+        public void Eat(Crab prey)
         {
-            base.Eat(obj);
-
-            if (obj is Crab crab && crab.Size == AnimalSize.Small)
+            if (!IsDead && prey.Size == AnimalSize.Small)
             {
-                crab.IsDead = true;
+                prey.IsDead = true;
             }
+        }
 
-            if (obj is Fish fish && (fish.Size == AnimalSize.Small && Size == AnimalSize.Medium || fish.Size == AnimalSize.Medium && Size == AnimalSize.Big))
+        public void Eat(Fish prey)
+        {
+            if (!IsDead && Size - prey.Size == 1)
             {
-                fish.IsDead = true;
+                prey.IsDead = true;
             }
         }
     }
